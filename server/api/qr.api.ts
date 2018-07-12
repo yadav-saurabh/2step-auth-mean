@@ -1,14 +1,15 @@
 import * as QRCode from 'qrcode';
 
-
-export default class Qr { 
-  // Get the data URL of the authenticator URL
+export default class QrApi { 
   
-  get(secret) {
-    console.log('qr  secret');
-    console.log(secret.otpauth_url);
-    QRCode.toDataURL(secret.otpauth_url, function(err, data_url) {
-      console.log(data_url);
+  public genrate(stringData) {
+    return new Promise((resolve, reject) => {
+      QRCode.toDataURL(stringData, (err, data) => {
+        if(!err) {
+          resolve(data);
+        }
+        reject('qr genration failed');
+      });
     });
   }
 

@@ -1,0 +1,37 @@
+<div class="h-100 row align-items-center justify-content-center">
+  <div class="col-md-6 col-sm-8 align-self-center">
+    <form #registerform="ngForm" (ngsubmit)="register(registerForm)">
+      <div class="form-group">
+        <div class="input-group input-icon">
+          <span class="icon">
+            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+          </span>
+          <input type="text" class="form-control form-control-lg input-field" id="signUpUserName" name="name" required="" ngmodel=""
+            placeholder="Enter Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-icon">
+          <span class="icon">
+            <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+          </span>
+          <input type="email" class="form-control form-control-lg input-field" id="signUpUserEmail" name="email" ngmodel="" required=""
+            placeholder="Enter email">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-icon">
+          <span class="icon">
+            <i class="fa fa-key fa-2x" aria-hidden="true"></i>
+          </span>
+          <input type="password" class="form-control form-control-lg input-field" id="userPassword" name="password" required="" ngmodel=""
+            placeholder="Password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
+    </form>
+  </div>
+  <!-- <div class="col-md-4 col-sm-8 align-self-center">
+    <ngx-recaptcha2 [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="handleExpire()" (load)="handleLoad()" (success)="handleSuccess($event)"></ngx-recaptcha2>
+  </div> -->
+</div>

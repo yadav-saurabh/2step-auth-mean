@@ -2,7 +2,7 @@ import * as mongodb from 'mongodb';
 
 let db;
 
-function con(){
+function con() {
   const MongoClient = mongodb.MongoClient;
   const url = 'mongodb+srv://test:test@cluster0-lghq2.gcp.mongodb.net/test?retryWrites=true';
   const dbName = 'test';

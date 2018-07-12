@@ -1,46 +1,36 @@
 import * as speakeasy from 'speakeasy';
 import Qr from './qr.api';
-import { HexBase64BinaryEncoding, Utf8AsciiBinaryEncoding } from 'crypto';
 
-export default class Speakeasy {
+export default class SpeakeasyApi {
 
   private token: string;
   private qr: Qr = new Qr();
   private secret: {
-    ascii: Utf8AsciiBinaryEncoding,
-    hex: HexBase64BinaryEncoding,
+    ascii: string,
+    hex: string,
     base32: string,
     otpauth_url: string
   };
 
 
-  genrateSecret() {
-    this.secret = speakeasy.generateSecret({ length: 20 });
-    console.log('this.secret');
-    console.log(this.secret);
-    // this.qr.get(this.secret); 
-    this.genrateToken();
-    this.verifyToken()
+  public genrateSecret() {
+    return speakeasy.generateSecret({ length: 20 });
   }
 
-  genrateToken() {
-    this.token = speakeasy.totp({
-      secret: this.secret.base32,
+  genrateToken(passkey) {
+    return speakeasy.totp({
+      secret: passkey,
       encoding: 'base32'
     });
-    console.log('this.token');
-    console.log(this.token);
   }
 
-  verifyToken() {
-    const tokenValidates = speakeasy.totp.verify({
-      secret: this.secret.base32,
+  verifyToken(passkey,userToken) {
+    return speakeasy.totp.verify({
+      secret: passkey,
       encoding: 'base32',
-      token: 'aaaaaa',
+      token: userToken,
       window: 6
     });
-    console.log('tokenValidates');
-    console.log(tokenValidates);
   }
 
 }
