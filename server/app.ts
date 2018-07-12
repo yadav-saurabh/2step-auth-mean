@@ -1,9 +1,13 @@
-import setRoutes from './routes';
-
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as path from 'path';
+
+import setRoutes from './routes';
+import MongodbApi from './api/mongodb.api';
+
+const mongo = new MongodbApi();
+// mongo.insertDocuments();
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));
