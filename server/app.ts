@@ -4,9 +4,12 @@ import * as morgan from 'morgan';
 import * as path from 'path';
 
 import setRoutes from './routes';
-import MongodbApi from './api/mongodb.api';
+import Speakeasy from './api/speakeasy.api';
+// import MongodbApi from './api/mongodb.api';
 
-const mongo = new MongodbApi();
+const speakeasy = new Speakeasy(); 
+speakeasy.genrateSecret();
+// const mongo = new MongodbApi();
 // mongo.insertDocuments();
 
 const app = express();
