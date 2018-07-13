@@ -40,7 +40,7 @@ $ npm run dev
 ```
 * try running using sudo command if write acces failed 
 
-open in browser : **[http://localhost:4200](http://localhost:4200)**  
+after strating the server open in browser : **[http://localhost:4200](http://localhost:4200)**  
 
 ### Note:
 
