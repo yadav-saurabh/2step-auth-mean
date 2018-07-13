@@ -35,11 +35,12 @@ $ npm install
 
 ```sh
 
-$ npm run dev /* try running using sudo command if write acces failed */
+$ npm run dev 
 
 ```
+* try running using sudo command if write acces failed 
 
-  
+open in browser : **[http://localhost:4200](http://localhost:4200)**  
 
 ### Note:
 
@@ -61,4 +62,4 @@ The keys provided there are only for testing purpose
 -  [speakeasy](https://github.com/speakeasyjs/speakeasy) : One-time passcode generator (HOTP/TOTP) with support for Google Authenticator
 
 -  [node-qrcode](https://github.com/soldair/node-qrcode) : qr code generator
--  [node-cron](https://github.com/merencia/node-cron) : A simple cron-like job scheduler for Node.js
+-  [ethers.js](https://github.com/ethers-io/ethers.js/) : Complete Ethereum wallet implementation and library in JavaScript.
