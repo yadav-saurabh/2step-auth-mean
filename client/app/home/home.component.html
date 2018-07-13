@@ -1,3 +1,9 @@
-<p>
-  home works!
-</p>
+<div class="model-outer w-100 justify-content-center align-items-center d-flex ">
+  <div class="model-inner w-75 h-75 justify-content-center align-items-center d-flex shadow rounded p-4">
+    <div class="m-4">
+      <p *ngIf="privateKey"> <strong class="text-primary">Private Key :</strong> <br> {{privateKey}}</p>
+      <p *ngIf="address"> <strong class="text-primary">Address : </strong> <br> {{address}}</p>
+    </div>
+    <button class="btn btn-primary btn-block w-50 mx-auto" (click)="genrateRandom()" > genrate Random Wallet</button>
+  </div>
+</div>

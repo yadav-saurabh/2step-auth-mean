@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import ClientConfig from '../../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
 
+  private config = new ClientConfig();
   public isUserLoggedIn = false;
-  private serverApi = 'http://127.0.0.1:3000/api';
+  private serverApi = this.config.serverApi;
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private httpClient: HttpClient,private router: Router) { }
@@ -32,6 +34,10 @@ export class CommonService {
 
   public verifySecretKey(data): Observable<{}> {
     return this.httpClient.post(this.serverApi + '/verifytoken', data, { headers: this.headers });
+  }
+
+  public genrateWallet(): Observable<{}> {
+    return this.httpClient.get(this.serverApi + '/genratewallet',  { headers: this.headers });
   }
 
   /**

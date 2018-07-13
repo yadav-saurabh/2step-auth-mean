@@ -11,7 +11,6 @@ export default function setRoutes(app) {
   const loginCtrl = new LoginCtrl;
   const registerCtrl = new RegisterCtrl;
 
-
   router.route('/login').post(loginCtrl.verifyUser);
 
   router.route('/register').post(registerCtrl.register);
@@ -21,6 +20,10 @@ export default function setRoutes(app) {
   router.route('/qrcode').get(apiCtrl.getQrCode);
 
   router.route('/verifytoken').post(apiCtrl.verifytoken);
+
+  router.route('/genratewallet').get(apiCtrl.genrateRandomWallet);
+  
+  // router.route('/genratewalletfromkey').post(apiCtrl.genrateFromKey);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

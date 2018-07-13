@@ -32,7 +32,6 @@ export class TwoAuthComponent implements OnInit {
   verify() {
     this.cs.verifySecretKey({usertoken:this.otpCode,passkey:this.key}).subscribe((res:any) => {
       this.verificationStatus = res.status;
-      console.log(res.status);
       if(res.status) {
         if (this.authType === 'register') {
           this.cs.register(this.formData).subscribe();

@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../service/common.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styles: ['.model-outer{height:100vh} .model-inner{flex-direction:column}']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
 
-  constructor() { }
+  address = '';
+  privateKey = '';
 
-  ngOnInit() {
+  constructor(private cs:CommonService) { }
+
+  genrateRandom(){
+    this.cs.genrateWallet().subscribe((data:any)=>{
+      this.privateKey = data.privateKey;
+      this.address = data.address;
+    });
   }
 
 }

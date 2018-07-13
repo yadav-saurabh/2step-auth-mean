@@ -8,4 +8,9 @@ export default class ClientConfig {
    *  https://www.google.com/recaptcha/admin#list
    */
   captchaKey =  '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+
+  /**
+   * serverApi Url nodeserver
+   */
+  serverApi = 'http://127.0.0.1:3000/api';
 }

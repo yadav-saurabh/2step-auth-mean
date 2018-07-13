@@ -1,11 +1,12 @@
 import QrApi from '../api/qr.api';
 import SpeakeasyApi from '../api/speakeasy.api';
+import EthersApi from '../api/ethers.api';
 
 export default class ApiCtrl {
 
   private qr = new QrApi();
   private speakeasy = new SpeakeasyApi();
-
+  private ethers = new EthersApi();
   /**
    * get qr code
    */
@@ -20,7 +21,7 @@ export default class ApiCtrl {
   }
 
   /**
-   * verify user token
+   * verify user token for 2-step auth
    */
   verifytoken = (req, res) => {
     const userToken = req.body.usertoken;
@@ -28,4 +29,18 @@ export default class ApiCtrl {
     res.json({ status: this.speakeasy.verifyToken(passkey, userToken) });
   }
 
+  /**
+   * genrate random ether wallet
+   */
+  genrateRandomWallet = (req,res) => {
+    res.json(this.ethers.genrateRandom());
+  }
+
+  /**
+   * genrate wallet from private key
+   */
+  genrateFromKey = (req,res)=>{
+    console.log(req.body.key);
+    res.json(this.ethers.genrateFromPrivateKey(req.body.key));
+  }
 } 

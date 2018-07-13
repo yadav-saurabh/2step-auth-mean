@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as  cors from 'cors';
 
 import setRoutes from './routes';
+import EthersApi from './api/ethers.api';
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -17,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 setRoutes(app);
+
+const ethers = new EthersApi();
 
 app.get('/*', function (req, res) {
   res.send("Invalid page");

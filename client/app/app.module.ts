@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TwoAuthComponent } from './two-auth/two-auth.component';
 import { HomeComponent } from './home/home.component';
-import ClientConfig from './config';
+import ClientConfig from '../config';
 
 const config = new ClientConfig(); 
 
