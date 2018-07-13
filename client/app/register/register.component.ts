@@ -8,18 +8,18 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
+  showVerification:Boolean = false;
+  model: any = {};
+  
   constructor() { }
 
   ngOnInit() {
   }
 
-  register(form: NgForm) {
-    console.log('register');
-    if (form.valid) {
-
-    } else {
-
-    }
+  register() {
+    this.showVerification = true;
+    console.log(this.showVerification);
+    console.log(this.model);
   }
 
 }

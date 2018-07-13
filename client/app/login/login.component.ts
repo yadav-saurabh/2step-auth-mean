@@ -4,38 +4,22 @@ import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 
-  imgData = '';
-  key = '';
-  otpCode = '';
-
+  showVerification:Boolean = false;
+  model: any = {};
+  
   constructor(private cs:CommonService) { }
   
   ngOnInit() {
   }
 
-  login(form:NgForm){
-    console.log('login form');
-    if (form.valid) {
-  
-    } else {
-  
-    }
-    this.cs.getQrCode().subscribe((res: any) => {
-      this.imgData = res.img;
-      this.key = res.key;
-    });
+  login() {
+    this.showVerification = true;
+    console.log(this.showVerification);
+    console.log(this.model);
   }
 
-  verify() {
-    console.log(this.otpCode);
-    this.cs.verifySecretKey({usertoken:this.otpCode,passkey:this.key}).subscribe( (data) => {
-      console.log(data);
-    });
-  }
-  
 }

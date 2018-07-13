@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { TwoAuthComponent } from './two-auth/two-auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TwoAuthComponent
   ],
   imports: [
     BrowserModule,
