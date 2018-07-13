@@ -32,7 +32,6 @@ export default class MongodbApi {
       this.connect().then((client: any) => {
         const db = client.db(this.mongoConfig.dbName)
         const collection = db.collection(this.mongoConfig.dbCollection);
-        console.log(data);
         collection.find(data).toArray((err, results) => {
           if (!err) {
             resolve(results);

@@ -21,7 +21,6 @@ export default class RegisterCtrl {
    * check if user already exists with given email
    */
   checkExisting = (req, res) => {
-    console.log(req.body.email);
     this.mongodb.read({email : req.body.email}).then((data: any) => {
       if (!!data && data.length > 0) {
         res.json({ status: false, msg: 'email already registered' });

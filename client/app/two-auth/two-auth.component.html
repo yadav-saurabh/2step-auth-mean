@@ -1,12 +1,17 @@
 <div class="text-center">
-  <img [src]="imgData" >
-  <p *ngIf="!!key">pass key: {{key}}</p> 
-  <strong *ngIf="!verificationStatus" class="text-danger"> Wrong Secret Key </strong>
-  <input type="text" class="form-control form-control-lg mt-2 input-field" placeholder="secret key" [(ngModel)]="otpCode" required="" >
-  <div class="mt-2 mb-2">
-    <ngx-recaptcha2 [size]="size" [hl]="lang" [theme]="theme" [type]="type"  (expire)="reCaptchaExpire()"  (success)="reCaptchaSuccess($event)"></ngx-recaptcha2>
+  <img [src]="imgData">
+  <div class="text-left">
+    <p>pass key: {{key}}</p>
   </div>
-  <button type="button" class="btn btn-secondary mt-2 btn-lg btn-block" (click)="verify()">
-    verify   <i class="fa fa-arrow-right " aria-hidden="true"></i>
+  <div class="mt-2 mb-2">
+    <ngx-recaptcha2 [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="reCaptchaExpire()" (success)="reCaptchaSuccess($event)"></ngx-recaptcha2>
+  </div>
+  <input type="text" class="form-control form-control-lg mt-2 input-field" placeholder="secret key" [(ngModel)]="otpCode" required="">
+  <div class="text-left">
+    <small *ngIf="!verificationStatus" class="text-danger"> Wrong Secret Key </small>
+  </div>
+  <button [disabled]="!captchaVerify || !otpCode" type="button" class="btn btn-secondary mt-2 btn-lg btn-block" (click)="verify()">
+    verify
+    <i class="fa fa-arrow-right " aria-hidden="true"></i>
   </button>
 </div>
