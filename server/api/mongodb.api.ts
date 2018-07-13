@@ -1,37 +1,68 @@
 import * as mongodb from 'mongodb';
-
-let db;
-
-function con() {
-  const MongoClient = mongodb.MongoClient;
-  const url = 'mongodb+srv://test:test@cluster0-lghq2.gcp.mongodb.net/test?retryWrites=true';
-  const dbName = 'test';
-  MongoClient.connect(url, { useNewUrlParser: true },(err,client)=>{
-    console.log("Connected successfully to Mongodb server");
-  });
-}
-
-
+import MongoConfig from '../config';
 
 export default class MongodbApi {
-  constructor(){
-    con();
-  }
-  
-  write(){
-    const collection = db.collection('tp');
-    collection.insertMany([{'akak' : 'op1'}, {'abc' : 'op2'}, {'xyz' : 'op3'}], function(err, result) {
-      console.log(err);
-      console.log("Inserted 3 documents into the collection");
-      console.log(result);
+
+  /**
+   * config of mongodb
+   */
+  private mongoConfig = new MongoConfig();
+
+  /**
+   * connect to mongodb server
+   */
+  connect = () => {
+    return new Promise((resolve, reject) => {
+      const mongoClient = mongodb.MongoClient;
+      mongoClient.connect(this.mongoConfig.url, { useNewUrlParser: true }, (err, client) => {
+        if (!err) {
+          resolve(client);
+        } else {
+          reject({status:false,msg:'error while connecting to mongodb server'});
+        }
+      });
     });
   }
-  
-  read() {
-    const collection = db.collection('tp');
-    collection.find({}).toArray(function(err, docs) {
-      console.log("Found the following records");
-      console.log(docs)
+
+  /**
+   * read db from mongodb sever
+   */
+  read = (data) => {
+    return new Promise((resolve, reject) => {
+      this.connect().then((client: any) => {
+        const db = client.db(this.mongoConfig.dbName)
+        const collection = db.collection(this.mongoConfig.dbCollection);
+        console.log(data);
+        collection.find(data).toArray((err, results) => {
+          if (!err) {
+            resolve(results);
+          } else {
+            reject({status:false,msg:'some error while reading in db'});
+          }
+          client.close();
+        });
+      });
     });
   }
+
+  /**
+   * write db from mongodb server
+   */
+  write = (data) => {
+    return new Promise((resolve, reject) => {
+      this.connect().then((client: any) => {
+        const db = client.db(this.mongoConfig.dbName)
+        const collection = db.collection(this.mongoConfig.dbCollection);
+        collection.insertOne(data, (err, result) => {
+          if (!err) {
+            resolve({status:true});
+          } else {
+            reject({status:false,msg:'some error while inserting in db'});
+          }
+          client.close();
+        });
+      });
+    });
+  }
+
 }

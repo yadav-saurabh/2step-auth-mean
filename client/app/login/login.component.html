@@ -6,6 +6,9 @@
           <span class="icon"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></span>
           <input type="email" class="form-control form-control-lg input-field"  id="email" name="email" required="" placeholder="Enter email"
           [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': loginform.submitted && email.invalid }" required email>
+          <div class="w-100">
+            <small *ngIf="loginform.submitted && email.invalid" class="text-danger">*required valid email.</small>  
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -15,12 +18,20 @@
           </span>
           <input type="password" class="form-control form-control-lg input-field"  id="password"
             name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': loginform.submitted && password.invalid }" required minlength="6" >
+            <div class="w-100">
+              <small *ngIf="loginform.submitted && password.invalid" class="text-danger">*required, minimum 6 char long.</small>  
+            </div>
         </div>
+      </div>
+      <div *ngIf="loginErr" class="w-100 mt-4">
+        <p class="text-danger">User Name or password is wrong.</p>  
       </div>
       <button type="submit" class="btn btn-success btn-lg btn-block">Log In</button>
     </form>
   </div>
   <div *ngIf="showVerification" class="align-self-center">
-   <app-two-auth ></app-two-auth> 
+    <p class="m-0"> Please Verify OTP fro Successful Login  </p>
+    <small class="text-muted">valid for otp genrated within 5 min</small>
+   <app-two-auth [authType]="'login'" [formData]="model" ></app-two-auth> 
   </div>
 </div>

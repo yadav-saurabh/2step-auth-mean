@@ -8,18 +8,26 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  loginErr:Boolean = false;
   showVerification:Boolean = false;
   model: any = {};
-  
+
   constructor(private cs:CommonService) { }
   
   ngOnInit() {
   }
 
   login() {
-    this.showVerification = true;
-    console.log(this.showVerification);
+    this.loginErr = false;
     console.log(this.model);
+    this.cs.login(this.model).subscribe((res: any) => {
+      console.log('login response');
+      if(res.status){
+        this.showVerification = true; 
+      } else {
+        this.loginErr = true;
+      }
+    });
   }
 
 }

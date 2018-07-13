@@ -8,6 +8,9 @@
           </span>
           <input type="text" class="form-control form-control-lg input-field" id="rname" name="name" required="" placeholder="Enter Name"
           [(ngModel)]="model.name" #name="ngModel" [ngClass]="{ 'is-invalid': registerform.submitted && name.invalid }" required >
+          <div class="w-100">
+              <small *ngIf="registerform.submitted  && name.invalid" class="text-danger">*required</small>  
+            </div>
         </div>
       </div>
       <div class="form-group">
@@ -17,6 +20,9 @@
           </span>
           <input type="email" class="form-control form-control-lg input-field" id="remail" name="email" required=""
             placeholder="Enter email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': registerform.submitted && email.invalid }" required email>
+          <div class="w-100">
+            <small *ngIf="registerform.submitted  && email.invalid" class="text-danger">*required valid email</small>  
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -26,12 +32,20 @@
           </span>
           <input type="password" class="form-control form-control-lg input-field" id="rpassword" name="password" required=""  placeholder="Password"
           [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': registerform.submitted && password.invalid }" required minlength="6" >
+          <div class="w-100">
+            <small *ngIf="registerform.submitted  && password.invalid" class="text-danger">*required, min length 6</small>  
+          </div>
         </div>
+      </div>
+      <div *ngIf="registerErr" class="w-100 mt-4">
+        <p class="text-danger">User with this email already exists.</p>  
       </div>
       <button type="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
     </form>
   </div>
   <div *ngIf="showVerification" class="align-self-center">
-    <app-two-auth ></app-two-auth> 
+    <p class="m-0">Please verify OTP for successfull registration</p>
+    <small class="text-muted">*valid for otp genrated within 5 min</small>
+    <app-two-auth [authType]="'register'" [formData]="model" ></app-two-auth> 
   </div>
 </div>

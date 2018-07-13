@@ -1,35 +1,33 @@
 import * as speakeasy from 'speakeasy';
-import Qr from './qr.api';
 
 export default class SpeakeasyApi {
 
-  private token: string;
-  private qr: Qr = new Qr();
-  private secret: {
-    ascii: string,
-    hex: string,
-    base32: string,
-    otpauth_url: string
-  };
-
-
+  /**
+   * genrate new secret key
+   */
   public genrateSecret() {
     return speakeasy.generateSecret({ length: 20 });
   }
 
-  genrateToken(passkey) {
+  /**
+   * genrate new token from the secret key
+   */
+  public genrateToken(passkey) {
     return speakeasy.totp({
       secret: passkey,
       encoding: 'base32'
     });
   }
 
-  verifyToken(passkey,userToken) {
+  /**
+   * verify user token and genrate token 
+   */
+  public verifyToken(passkey,userToken) {
     return speakeasy.totp.verify({
       secret: passkey,
       encoding: 'base32',
       token: userToken,
-      window: 6
+      window: 2 * 10 // valid only for 5 minutes
     });
   }
 

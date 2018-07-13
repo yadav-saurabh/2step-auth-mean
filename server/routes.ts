@@ -1,18 +1,26 @@
 import * as express from 'express';
-import QrCtrl from './controllers/qr.ctrl';
-import SpeakeasyCtrl from './controllers/speakeasy.ctrl';
+import ApiCtrl from './controllers/api.ctrl';
+import RegisterCtrl from './controllers/reqister.crl';
+import LoginCtrl from './controllers/login.ctrl';
 
 export default function setRoutes(app) {
 
   const router = express.Router();
 
-  const qrCtrl = new QrCtrl;
-  const speakeasyCtrl = new SpeakeasyCtrl;
+  const apiCtrl = new ApiCtrl;
+  const loginCtrl = new LoginCtrl;
+  const registerCtrl = new RegisterCtrl;
 
+
+  router.route('/login').post(loginCtrl.verifyUser);
+
+  router.route('/register').post(registerCtrl.register);
   
-  router.route('/qrcode').get(qrCtrl.getQrCode);
+  router.route('/checkexistinguser').post(registerCtrl.checkExisting);
 
-  router.route('/verifytoken').post(speakeasyCtrl.verifytoken);
+  router.route('/qrcode').get(apiCtrl.getQrCode);
+
+  router.route('/verifytoken').post(apiCtrl.verifytoken);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

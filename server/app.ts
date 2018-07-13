@@ -5,13 +5,6 @@ import * as path from 'path';
 import * as  cors from 'cors';
 
 import setRoutes from './routes';
-import Speakeasy from './api/speakeasy.api';
-// import MongodbApi from './api/mongodb.api';
-
-// const speakeasy = new Speakeasy(); 
-// speakeasy.genrateSecret();
-// const mongo = new MongodbApi();
-// mongo.insertDocuments();
 
 const app = express();
 app.set('port', (process.env.PORT || 3000));

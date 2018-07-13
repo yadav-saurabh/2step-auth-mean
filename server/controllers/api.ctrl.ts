@@ -1,11 +1,14 @@
 import QrApi from '../api/qr.api';
 import SpeakeasyApi from '../api/speakeasy.api';
 
-export default class QrCtrl {
+export default class ApiCtrl {
 
-  qr = new QrApi();
-  speakeasy = new SpeakeasyApi();
+  private qr = new QrApi();
+  private speakeasy = new SpeakeasyApi();
 
+  /**
+   * get qr code
+   */
   getQrCode = (req, res) => {
     const secret = this.speakeasy.genrateSecret();
     this.qr.genrate(secret.otpauth_url)
@@ -16,5 +19,13 @@ export default class QrCtrl {
       });
   }
 
+  /**
+   * verify user token
+   */
+  verifytoken = (req, res) => {
+    const userToken = req.body.usertoken;
+    const passkey = req.body.passkey;
+    res.json({ status: this.speakeasy.verifyToken(passkey, userToken) });
+  }
 
 } 
